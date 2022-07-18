@@ -1,6 +1,14 @@
 # Simple_Interpreter
 Building a Simple Interpreter according to https://ruslanspivak.com/lsbasi-part1/
 
+Interpreter #2:
+This lessons is supposed to add the following functionality:
+    1. Handle whitespace characters anywhere in the input string
+    2. Consume multi-digit integers from the input
+    3. Subtract two integers (currently it can only add integers)
+    
+I already jumped ahead and added 2 and 3 in the first lesson so never mind that.  So only 1 is added in this lesson.
+
 Interpreter #1:
 This first lesson is pretty straight forward. 
 
@@ -19,7 +27,7 @@ error serves to notify that the input was malformed or invalid.
 'eat' processes one token to the next.
 'expression' will actually use the token values to produce an algebraic output.
 
-This implementation can only handle simple algebraic functions without precedence and numbers of single digits only.
+This implementation can only handle simple algebraic functions without precedence ~~and numbers of single digits only~~.
 
 Motivation:
 Abstract Syntax Tree
