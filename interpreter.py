@@ -1,4 +1,3 @@
-
 # Token types
 #
 # EOF (end-of-file) token is used to indicate that
@@ -87,13 +86,25 @@ class Interpreter(object):
         
         # get a character at the position self.pos and decide
         # what token to create based on the single character
+<<<<<<< HEAD
         #self.current_char = self.text[self.pos]
+=======
+        #current_char = self.text[self.pos]
+
+        while (self.current_char.isspace()):
+            if(self.endofstring()):
+                return Token(EOF, None)
+            else:
+                self.pos+=1
+                self.current_char = self.text[self.pos]
+>>>>>>> main
                 
         # if the character is a digit then convert it to
         # integer, create an INTEGER token, increment self.pos
         # index to point to the next character after the digit,
         # and return the INTEGER token
         
+<<<<<<< HEAD
             if self.current_char.isdigit():
                 token = Token(INTEGER, self.getnumber())
                 return token
@@ -120,6 +131,51 @@ class Interpreter(object):
                 
             self.error()
         return Token(EOF, None)
+=======
+        #if current_char.isdigit():
+        #    token = Token(INTEGER, int(current_char))
+        #    self.pos += 1
+        #    return token
+        if self.current_char.isdigit():
+            while self.current_char.isdigit():
+                if number == None:
+                    number = self.current_char
+                else:
+                    number += self.current_char
+                if(self.endofstring()):
+                    break
+                else:
+                    self.pos+=1
+                    self.current_char = self.text[self.pos]
+        
+        if number != None:
+            token = Token(INTEGER, int(number))
+            return token
+            
+        if self.current_char == '+':
+            token = Token(PLUS, self.current_char)
+            self.pos+=1
+            self.current_char = self.text[self.pos]
+            return token
+            
+        if self.current_char == '-':
+            token = Token(MINUS, self.current_char)
+            self.pos+=1
+            self.current_char = self.text[self.pos]
+            return token
+            
+        if self.current_char == '/':
+            token = Token(DIVIDE, self.current_char)
+            self.pos+=1
+            self.current_char = self.text[self.pos]
+            return token
+
+        if self.current_char == '*':
+            token = Token(MULTIPLY, self.current_char)
+            self.pos+=1
+            self.current_char = self.text[self.pos]
+            return token
+>>>>>>> main
 
         
     def eat(self, token_type):
@@ -141,11 +197,58 @@ class Interpreter(object):
 
         # set current token to the first token taken from the input
         self.current_token = self.get_next_token()
+<<<<<<< HEAD
         
         result = self.term()
         
         while self.current_token.type in (PLUS, MINUS, DIVIDE, MULTIPLY):
                 token = self.current_token
+=======
+
+        #left = self.current_token
+        #self.eat(INTEGER)
+
+        # we expect the current token to be a '+' token
+        #op = self.current_token
+        #self.eat(PLUS)
+
+        #right = self.current_token
+        #self.eat(INTEGER)
+        # after the above call the self.current_token is set to
+        # EOF token
+
+        # at this point INTEGER PLUS INTEGER sequence of tokens
+        # has been successfully found and the method can just
+        # return the result of adding two integers, thus
+        # effectively interpreting client input
+        #result = left.value + right.value
+
+        # we expect the current token to be a single-digit integer
+        left = self.current_token
+        print("Left token: " + str(left.value))
+        self.eat(left.type)
+        
+        op = self.current_token
+        print("Op token: " + op.value)
+        self.eat(op.type)
+        
+        # we expect the current token to be a single-digit integer
+        right = self.current_token
+        print("Right token: " + str(right.value))
+        self.eat(right.type)
+        
+        if(op.type == PLUS):
+            print("Left value: " + str(left.value) + " Right value: " + str(right.value))
+            result = left.value + right.value # eval(left.value + op.value + right.value) #
+        
+        if(op.type == MINUS):
+            result = left.value - right.value # eval(left.value + op.value + right.value) #
+
+        if(op.type == DIVIDE):
+            if(right.value == 0):
+                print("Divide by zero not allowed")
+                result = None #Cannot divide by zero
+>>>>>>> main
                 
                 if( token.type == PLUS):
                     self.eat(token.type)
