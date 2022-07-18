@@ -1,6 +1,26 @@
 # Simple_Interpreter
 Building a Simple Interpreter according to https://ruslanspivak.com/lsbasi-part1/
 
+Interpreter #1:
+This first lesson is pretty straight forward. 
+
+The python code is broken into several 'sections';  string literals, two classes and the main function.  
+
+The string literals are used to identify the various types of objects that will be in our stream input to our simiple interpreter.  This number of literals will grow as the program grows to include more operations, symbols, etc.  
+
+The classes are currently an Interpreter and Token class.
+The input stream of the interpreter must tokenize the various symbols that will be part of the input stream.  Each token has a type and corresponding value.  The token class will hold this information (Token{type, value}).
+The Interpeter class will do the process the input stream as token and produce an output.  It has four member variables; the input text {text}, the current position in the text {pos}, the current character being processed {current_char}, and the current token from the input stream {current_token}.
+
+In addition to the init function, there other functions are; error, endofstring, get_next_token, eat, expression.
+error serves to notify that the input was malformed or invalid.
+'endofstring' keeps track of the current character position of the input text.
+'get_next_token' processes the input symbols as tokens.
+'eat' processes one token to the next.
+'expression' will actually use the token values to produce an algebraic output.
+
+This implementation can only handle simple algebraic functions without precedence and numbers of single digits only.
+
 Motivation:
 Abstract Syntax Tree
 
