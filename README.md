@@ -9,6 +9,12 @@ This lessons is supposed to add the following functionality:
     
 I already jumped ahead and added 2 and 3 in the first lesson so never mind that.  So only 1 is added in this lesson.
 
+The function 'endofstring' was changed to lastcharacter.  Another function will now track the position in the text being processed while this determines if the end of the string input has been reached.
+
+The function 'nextchar' that advances the position in the text was added. This function takes over the funcitonality that was in each of the branches of 'get_next_token'.
+
+The functionality of capturing a number was separated into its own function,  and is now called from 'getnumber' in 'get_next_token'.
+
 Interpreter #1:
 This first lesson is pretty straight forward. 
 
