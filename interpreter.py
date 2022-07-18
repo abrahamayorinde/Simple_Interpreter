@@ -1,4 +1,3 @@
-
 # Token types
 #
 # EOF (end-of-file) token is used to indicate that
@@ -71,7 +70,7 @@ class Interpreter(object):
         # what token to create based on the single character
         #current_char = self.text[self.pos]
 
-        while (self.current_char == " "):
+        while (self.current_char.isspace()):
             if(self.endofstring()):
                 return Token(EOF, None)
             else:
@@ -97,7 +96,7 @@ class Interpreter(object):
                     break
                 else:
                     self.pos+=1
-                self.current_char = self.text[self.pos]
+                    self.current_char = self.text[self.pos]
         
         if number != None:
             token = Token(INTEGER, int(number))
@@ -105,20 +104,27 @@ class Interpreter(object):
             
         if self.current_char == '+':
             token = Token(PLUS, self.current_char)
-            self.pos += 1
+            self.pos+=1
+            self.current_char = self.text[self.pos]
             return token
             
         if self.current_char == '-':
             token = Token(MINUS, self.current_char)
-            self.pos +=1
+            self.pos+=1
+            self.current_char = self.text[self.pos]
+            return token
             
         if self.current_char == '/':
             token = Token(DIVIDE, self.current_char)
-            self.pos +=1
+            self.pos+=1
+            self.current_char = self.text[self.pos]
+            return token
 
         if self.current_char == '*':
             token = Token(MULTIPLY, self.current_char)
-            self.pos +=1
+            self.pos+=1
+            self.current_char = self.text[self.pos]
+            return token
 
         self.error()
         
@@ -137,7 +143,6 @@ class Interpreter(object):
         # set current token to the first token taken from the input
         self.current_token = self.get_next_token()
 
-        # we expect the current token to be a single-digit integer
         #left = self.current_token
         #self.eat(INTEGER)
 
@@ -145,7 +150,6 @@ class Interpreter(object):
         #op = self.current_token
         #self.eat(PLUS)
 
-        # we expect the current token to be a single-digit integer
         #right = self.current_token
         #self.eat(INTEGER)
         # after the above call the self.current_token is set to
@@ -156,20 +160,23 @@ class Interpreter(object):
         # return the result of adding two integers, thus
         # effectively interpreting client input
         #result = left.value + right.value
-        
+
+        # we expect the current token to be a single-digit integer
         left = self.current_token
+        print("Left token: " + str(left.value))
         self.eat(left.type)
         
         op = self.current_token
-        print("Left token: " + op.value)
+        print("Op token: " + op.value)
         self.eat(op.type)
         
+        # we expect the current token to be a single-digit integer
         right = self.current_token
-        print("Right token: " + right.value)
+        print("Right token: " + str(right.value))
         self.eat(right.type)
         
         if(op.type == PLUS):
-            print("Left value: " + str(left.value) + "Right value: " + str(right.value))
+            print("Left value: " + str(left.value) + " Right value: " + str(right.value))
             result = left.value + right.value # eval(left.value + op.value + right.value) #
         
         if(op.type == MINUS):
